@@ -21,6 +21,8 @@ RUN apt-get update -qy && apt-get upgrade -y && \
         pytest pyyaml ryu tox twine wheel \
         dpkt jsonrpclib-pelix pyyaml pyzmq-ctypes repoze.lru scapy simple_enum simpy texttable
 
+RUN apt-get install -y pciutils
+
 ARG DOCKER_TAG=v2.39
 ADD https://trex-tgn.cisco.com/trex/release/${DOCKER_TAG}.tar.gz trex.tar.gz
 RUN tar -xf trex.tar.gz && mv ${DOCKER_TAG} /trex && rm trex.tar.gz
