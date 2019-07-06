@@ -36,8 +36,7 @@ RUN tar -xf trex_client*.tar.gz && \
     mkdir -p /usr/local/lib/python3.7/site-packages && \
     cp -pr trex_client/interactive/trex_stl_lib /usr/local/lib/python3.7/site-packages && \
     cp -pr trex_client/stf/trex_stf_lib /usr/local/lib/python3.7/site-packages && \
-    cp -pr trex_client/external_libs/trex-openssl /usr/local/lib/python3.7/site-packages
-
-RUN apt-get autoremove && \
+    cp -pr trex_client/external_libs/trex-openssl /usr/local/lib/python3.7/site-packages && \
+    apt-get autoremove && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
