@@ -25,16 +25,16 @@ RUN tar -xf trex.tar.gz && mv ${DOCKER_TAG} /trex && rm trex.tar.gz
 WORKDIR /trex
 RUN tar -xf trex_client*.tar.gz && \
     # Python2.7
-    cp -pr trex_client/stl/trex_stl_lib /usr/local/lib/python2.7/site-packages && \
+    cp -pr trex_client/interactive/trex_stl_lib /usr/local/lib/python2.7/site-packages && \
     cp -pr trex_client/stf/trex_stf_lib /usr/local/lib/python2.7/site-packages && \
     cp -pr trex_client/external_libs/trex-openssl /usr/local/lib/python2.7/site-packages && \
     # Python3.6
-    cp -pr trex_client/stl/trex_stl_lib /usr/local/lib/python3.6/site-packages && \
+    cp -pr trex_client/interactive/trex_stl_lib /usr/local/lib/python3.6/site-packages && \
     cp -pr trex_client/stf/trex_stf_lib /usr/local/lib/python3.6/site-packages && \
     cp -pr trex_client/external_libs/trex-openssl /usr/local/lib/python3.6/site-packages && \
     # Python3.7
     mkdir -p /usr/local/lib/python3.7/site-packages && \
-    cp -pr trex_client/stl/trex_stl_lib /usr/local/lib/python3.7/site-packages && \
+    cp -pr trex_client/interactive/trex_stl_lib /usr/local/lib/python3.7/site-packages && \
     cp -pr trex_client/stf/trex_stf_lib /usr/local/lib/python3.7/site-packages && \
     cp -pr trex_client/external_libs/trex-openssl /usr/local/lib/python3.7/site-packages && \
     # Cleanup image
