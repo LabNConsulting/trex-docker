@@ -21,7 +21,7 @@ RUN apt-get update -qy && apt-get upgrade -y && \
         pytest pyyaml ryu tox twine wheel \
         dpkt jsonrpclib-pelix pyyaml pyzmq-ctypes repoze.lru scapy simple_enum simpy texttable
 
-ARG TREX_TAG=v2.57
+ARG TREX_TAG=v2.39
 ADD https://trex-tgn.cisco.com/trex/release/${TREX_TAG}.tar.gz trex.tar.gz
 RUN tar -xf trex.tar.gz && mv ${TREX_TAG} /trex && rm trex.tar.gz
 WORKDIR /trex
