@@ -48,4 +48,4 @@ RUN tar -xf trex_client*.tar.gz && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-EXPOSE 8090
+EXPOSE 4500 4501 8090
