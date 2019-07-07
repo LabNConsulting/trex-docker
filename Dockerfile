@@ -24,6 +24,8 @@ ADD https://trex-tgn.cisco.com/trex/release/${DOCKER_TAG}.tar.gz trex.tar.gz
 RUN tar -xf trex.tar.gz && mv ${DOCKER_TAG} /trex && rm trex.tar.gz
 WORKDIR /trex
 RUN tar -xf trex_client*.tar.gz && \
+    # silly expectation of trex
+    cp -pr trex_client/external_libs /usr/local && \
     # Python2.7
     (cp -pr trex_client/interactive/trex_stl_lib /usr/local/lib/python2.7/dist-packages || \
      cp -pr trex_client/stl/trex_stl_lib /usr/local/lib/python2.7/dist-packages) && \
