@@ -1,5 +1,5 @@
 FROM ubuntu:18.04
-ARG DOCKER_TAG=v2.57
+ARG DOCKER_TAG=v2.65
 
 RUN apt-get update -qy && apt-get upgrade -y && \
         DEBIAN_FRONTEND=noninteractive apt-get install -y \
