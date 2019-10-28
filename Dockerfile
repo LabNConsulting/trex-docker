@@ -1,8 +1,6 @@
 FROM ubuntu:18.04
 ARG DOCKER_TAG=v2.65
 
-# Fail fast since this seems to fail a lot.
-ADD https://trex-tgn.cisco.com/trex/release/${DOCKER_TAG}.tar.gz trex.tar.gz
 
 RUN apt-get update -qy && apt-get upgrade -y && \
         DEBIAN_FRONTEND=noninteractive apt-get install -y \
@@ -23,7 +21,7 @@ RUN apt-get update -qy && apt-get upgrade -y && \
         dpkt jsonrpclib-pelix pyyaml pyzmq-ctypes repoze.lru scapy simple_enum simpy texttable
 
 COPY wait-for*.sh /usr/bin/
-RUN tar -xf trex.tar.gz && mv ${DOCKER_TAG} /trex && rm trex.tar.gz
+RUN curl https://trex-tgn.cisco.com/trex/release/${DOCKER_TAG}.tar.gz | tar -xzf - && mv ${DOCKER_TAG} /trex
 WORKDIR /trex
 RUN tar -xf trex_client*.tar.gz && \
     # silly expectation of trex
@@ -49,5 +47,6 @@ RUN tar -xf trex_client*.tar.gz && \
     apt-get autoremove && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
 
 EXPOSE 4500 4501 8090
