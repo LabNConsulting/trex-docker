@@ -3,7 +3,7 @@ ARG TARFILE=latest
 
 RUN apt-get update -qy && apt-get upgrade -y && \
         DEBIAN_FRONTEND=noninteractive apt-get install -y \
-        bash bash-completion bsdtar bzip2 cpio curl gettext gettext \
+        bash bash-completion bsdtar bzip2 cpio curl ethtool gettext gettext \
         git git iproute2 iputils-ping libedit-dev libffi-dev libgmp-dev \
         libncurses5-dev libpython-dev libssl-dev libssl-dev libtool \
         linux-headers-generic locales make net-tools netcat-openbsd \
