@@ -4,9 +4,9 @@ ARG TARFILE=latest
 RUN apt-get update -qy && apt-get upgrade -y && \
         DEBIAN_FRONTEND=noninteractive apt-get install -y \
         bash bash-completion bsdtar bzip2 cpio curl ethtool gettext gettext \
-        git git iproute2 iputils-ping libedit-dev libffi-dev libgmp-dev \
+        git git iproute2 iputils-ping jq libedit-dev libffi-dev libgmp-dev \
         libncurses5-dev libpython-dev libssl-dev libssl-dev libtool \
-        linux-headers-generic locales make net-tools netcat-openbsd \
+        linux-headers-generic locales lsof make net-tools netcat-openbsd \
         patch pciutils perl-modules python python-dev python-ipaddr python-pip \
         python3 python3-dev python3-pip python3-venv sudo tidy util-linux wget \
         xsltproc xutils-dev  zlib1g-dev && \
@@ -20,8 +20,9 @@ RUN apt-get update -qy && apt-get upgrade -y && \
         dpkt jsonrpclib-pelix pyyaml pyzmq-ctypes repoze.lru scapy simple_enum simpy texttable
 
 COPY wait-for*.sh /usr/bin/
-RUN curl https://trex-tgn.cisco.com/trex/release/${TARFILE} | tar -xzf - && mv v?.?? /trex
 WORKDIR /trex
+COPY ${TARFILE} .
+RUN tar -xzf ${TARFILE} --strip-components=1 && rm ${TARFILE}
 RUN tar -xf trex_client*.tar.gz && \
     # silly expectation of trex
     cp -pr trex_client/external_libs /usr/local && \
@@ -46,6 +47,5 @@ RUN tar -xf trex_client*.tar.gz && \
     apt-get autoremove && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-
 
 EXPOSE 4500 4501 8090

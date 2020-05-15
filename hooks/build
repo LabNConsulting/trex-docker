@@ -1,6 +1,16 @@
 #!/bin/bash
+set -ex
+
 if [ "$DOCKER_TAG" == "latest" ]; then
-    docker build -f $DOCKERFILE_PATH -t $IMAGE_NAME .
+    TARFILE=${DOCKER_TAG}
 else
-    docker build --build-arg TARFILE=${DOCKER_TAG}.tar.gz -f $DOCKERFILE_PATH -t $IMAGE_NAME .
+    TARFILE=${DOCKER_TAG}.tar.gz
 fi
+
+if ! curl -fLO https://trex-tgn.cisco.com/trex/release/${TARFILE}; then
+    echo Certificate Problem, downloading and checking SHA
+    curl --insecure -fLO https://trex-tgn.cisco.com/trex/release/${TARFILE}
+    sha256sum -c <(cat SHA256SUMS | grep ${TARFILE})
+fi
+
+docker build --build-arg TARFILE=${TARFILE} -f $DOCKERFILE_PATH -t $IMAGE_NAME .
